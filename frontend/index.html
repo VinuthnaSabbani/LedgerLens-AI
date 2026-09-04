@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Razorpay LedgerLens AI - Financial Intelligence & Incident Guard</title>
+  <meta name="description" content="Executive financial intelligence and incident response: Revenue, Money at Risk, Money Recovered, and Active Incident Triage.">
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/incidents.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Simplified Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-text">Razorpay <span>LedgerLens</span></div>
+          <span class="badge-track">AI Financial Incident Guard</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="workflow-stepper-mini" title="Core Incident Workflow">
+          <span class="workflow-badge">RESPONSE WORKFLOW</span>
+          <div class="workflow-flow-text">
+            <span>Detect</span> ➔ <span>Investigate</span> ➔ <span>Quantify</span> ➔ <span>Simulate</span> ➔ <span>Recommend</span> ➔ <span>Approve</span> ➔ <span>Measure</span> ➔ <span>Learn</span>
+          </div>
+        </div>
+
+        <div class="nav-section-title">OVERVIEW</div>
+        <a href="/index.html" class="nav-item active" data-nav="overview" title="Financial dashboard, active incident spotlight, and profit health">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span>Dashboard</span>
+        </a>
+
+        <div class="nav-section-title">INTELLIGENCE</div>
+        <a href="/incidents.html" class="nav-item" data-nav="incidents" title="Track, investigate, and mitigate financial payment incidents">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Financial Incidents</span>
+          <span class="nav-badge danger" id="sidebar-incident-badge">2</span>
+        </a>
+        <a href="/investigation.html" class="nav-item" data-nav="investigation" title="5-step root cause analysis, evidence, and recommended mitigation">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+          <span>Investigation</span>
+        </a>
+        <a href="/simulator.html" class="nav-item" data-nav="simulator" title="Simulate financial outcomes of faster response strategies">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>What-If Simulator</span>
+        </a>
+
+        <div class="nav-section-title">CONTROL</div>
+        <a href="/actions.html" class="nav-item" data-nav="actions" title="Automated actions log, approval policies, and execution audit trail">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>Actions & Audit</span>
+        </a>
+
+        <div class="nav-section-title">INSIGHTS</div>
+        <a href="/postmortem.html" class="nav-item" data-nav="postmortem" title="Incident postmortems, financial recovery audit, and prevention rules">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span>Postmortems</span>
+        </a>
+
+        <div class="nav-section-title">SETTINGS</div>
+        <a href="/datasources.html" class="nav-item" data-nav="datasources" title="Connected store feeds, gateway webhooks, and payment sources">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <span>Data Connections</span>
+        </a>
+        <a href="/test-environment.html" class="nav-item" data-nav="testenv" title="Interactive payment failure triggers and synthetic webhook sandbox">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31L4.67 19.34A2 2 0 0 0 6.42 22h11.16a2 2 0 0 0 1.75-2.66L14 9.32V2"/><line x1="8.5" y1="2" x2="15.5" y2="2"/><line x1="7" y1="14.5" x2="17" y2="14.5"/></svg>
+          <span>Test Environment</span>
+        </a>
+        <a href="/settings.html" class="nav-item" data-nav="guardrails" title="Autonomous action ceilings, approval policies, and safety thresholds">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Action Guardrails</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="merchant-pill">
+          <div class="merchant-avatar">AP</div>
+          <div class="merchant-info">
+            <div class="merchant-name" id="sidebar-merchant-name">Apex Brands Retail</div>
+            <div class="merchant-status"><span class="pulse-dot"></span> Connected Store (Test Data)</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="page-title-group">
+            <h1>Dashboard</h1>
+            <div class="page-subtitle">Real-time revenue monitoring, active incident containment, and profit health</div>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="live-telemetry-badge">
+            <span class="pulse-dot"></span> <span id="telemetry-count">1,260</span> Orders Audited (Test Environment)
+          </div>
+          <button class="btn btn-ai btn-sm" id="btn-quick-failover">
+            ⚡ Test Simulated Fallback
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Body -->
+      <main class="content-body">
+        <!-- Date Filters & Actions Bar -->
+        <div class="dashboard-actions-bar">
+          <div class="date-filter-group" id="date-range-filter">
+            <button class="date-filter-btn" data-range="today">Today</button>
+            <button class="date-filter-btn active" data-range="7d">Last 7 Days</button>
+            <button class="date-filter-btn" data-range="mtd">MTD August</button>
+            <button class="date-filter-btn" data-range="q3">Q3 2026</button>
+          </div>
+
+          <div class="action-buttons-group">
+            <a href="/simulator.html" class="btn btn-secondary btn-sm" title="Simulate potential money saved">
+              🔮 Open What-If Simulator
+            </a>
+            <button class="btn btn-primary btn-sm" id="btn-export-brief" title="Export Financial Incident Brief (PDF)">
+              📄 Financial Incident Brief (PDF)
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btn-export-raw-json" title="Export Raw Data as JSON">
+              Export Raw Data
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Top KPIs ONLY -->
+        <div class="kpi-grid-4">
+          <!-- 1. Revenue -->
+          <div class="kpi-card" id="kpi-card-revenue" title="Total gross sales recorded across all payment channels">
+            <div class="kpi-header">
+              <span class="kpi-title">Revenue</span>
+              <div class="kpi-icon-wrap" style="color: #60a5fa;">₹</div>
+            </div>
+            <div class="kpi-value" id="kpi-total-revenue">₹82,40,000</div>
+            <div class="kpi-footer">
+              <span class="trend-pill up">↑ 18.2%</span> vs last month
+            </div>
+            <div class="kpi-progress-track">
+              <div class="kpi-progress-bar" style="width: 82%;"></div>
+            </div>
+          </div>
+
+          <!-- 2. Money At Risk -->
+          <div class="kpi-card highlight-danger" id="kpi-card-risk" title="Gross customer transaction volume currently exposed to active failure routes">
+            <div class="kpi-header">
+              <span class="kpi-title">Money At Risk</span>
+              <div class="kpi-icon-wrap" style="color: #ef4444;">⚠️</div>
+            </div>
+            <div class="kpi-value text-danger" id="kpi-money-at-risk">₹4,20,000</div>
+            <div class="kpi-footer">
+              <span class="trend-pill down">1 Critical</span> HDFC route degraded
+            </div>
+            <div class="kpi-progress-track">
+              <div class="kpi-progress-bar danger" style="width: 75%;"></div>
+            </div>
+          </div>
+
+          <!-- 3. Money Recovered -->
+          <div class="kpi-card highlight-profit" id="kpi-card-recovered" title="Total revenue protected and recovered through automated and approved actions">
+            <div class="kpi-header">
+              <span class="kpi-title">Money Recovered</span>
+              <div class="kpi-icon-wrap" style="color: #10b981;">🛡️</div>
+            </div>
+            <div class="kpi-value text-success" id="kpi-money-recovered">₹1,65,600</div>
+            <div class="kpi-footer">
+              <span class="trend-pill up">92.0%</span> of projected recovery
+            </div>
+            <div class="kpi-progress-track">
+              <div class="kpi-progress-bar success" style="width: 92%;"></div>
+            </div>
+          </div>
+
+          <!-- 4. Active Incidents -->
+          <div class="kpi-card highlight-warning" id="kpi-card-incidents" title="Total number of active financial incidents requiring investigation">
+            <div class="kpi-header">
+              <span class="kpi-title">Active Incidents</span>
+              <div class="kpi-icon-wrap" style="color: #f59e0b;">🔔</div>
+            </div>
+            <div class="kpi-value text-warning" id="kpi-active-incidents">2 Active</div>
+            <div class="kpi-footer">
+              <span>1 Critical, 1 Warning</span>
+            </div>
+            <div class="kpi-progress-track">
+              <div class="kpi-progress-bar warning" style="width: 50%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main / Highlighted Section: Active Financial Incident -->
+        <div class="active-incident-hero" id="main-active-incident-section">
+          <div class="active-incident-hero-header">
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <span class="badge badge-critical" id="hero-inc-severity">CRITICAL</span>
+              <span class="badge badge-purple" id="hero-inc-status">ACTIVE ANOMALY &bull; ACTION READY</span>
+              <span class="incident-code-badge" id="hero-inc-code">FI-2026-1842</span>
+              <span style="font-size: 12.5px; color: var(--text-secondary);" id="hero-inc-time">Started Today, 2:14 PM</span>
+            </div>
+            <div>
+              <span class="confidence-pill" style="background: rgba(139, 92, 246, 0.2); border: 1px solid rgba(139, 92, 246, 0.4); color: #c4b5fd;" id="hero-inc-confidence">
+                91% AI Confidence
+              </span>
+            </div>
+          </div>
+
+          <div class="active-incident-hero-title-row">
+            <h2 id="hero-inc-title">Severe Card Payment Failure Spike on HDFC Route</h2>
+          </div>
+
+          <p class="active-incident-hero-desc" id="hero-inc-what-happened">
+            Card payment failure rate surged from normal 4.2% to 19.8% on primary HDFC card acquiring route at 2:14 PM today during peak merchant checkout volume. 1,247 customer checkout attempts impacted.
+          </p>
+
+          <!-- Metrics Strip -->
+          <div class="active-incident-metrics-strip">
+            <div class="active-incident-metric-item">
+              <div class="metric-label">Money At Risk</div>
+              <div class="metric-val" style="color: #f87171;" id="hero-inc-exposure">₹4,20,000</div>
+            </div>
+            <div class="active-incident-metric-item">
+              <div class="metric-label">Failure Rate</div>
+              <div class="metric-val" style="color: #fb923c;" id="hero-inc-fail-rate">19.8% <span style="font-size: 13px; color: var(--text-muted); font-weight: 500;">(vs 4.2% SLA)</span></div>
+            </div>
+            <div class="active-incident-metric-item">
+              <div class="metric-label">Projected Recovery</div>
+              <div class="metric-val" style="color: #34d399;" id="hero-inc-recovery">₹1,80,000</div>
+            </div>
+            <div class="active-incident-metric-item">
+              <div class="metric-label">Primary Route</div>
+              <div class="metric-val" style="color: #cbd5e1; font-size: 16px; margin-top: 4px;" id="hero-inc-route">HDFC-PG-ROUTE-V3</div>
+            </div>
+          </div>
+
+          <!-- Hero Footer with Action Callout and CTA Buttons -->
+          <div class="active-incident-hero-footer">
+            <div class="recommended-action-callout">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span>Recommended Action: <strong id="hero-inc-action">Deploy simulated fallback to instant UPI modal and secondary acquirer rail</strong></span>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn btn-ai btn-sm" id="btn-spotlight-action">
+                ⚡ Apply Simulated Fallback (Save ₹1.80L)
+              </button>
+              <a href="/investigation.html?id=inc_fi_2026_1842" id="hero-inc-investigate-btn" class="btn btn-primary btn-sm">
+                Investigate Root Cause →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ONE Main Chart: Revenue vs Take-Home Profit -->
+        <div class="card" style="margin-bottom: 24px;">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Sales Revenue vs Take-Home Profit Trend</h2>
+              <div class="card-subtitle">7-Day comparison of gross sales volume vs estimated net retained earnings</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="badge badge-info">7-Day Window</span>
+            </div>
+          </div>
+          <div class="chart-container" style="height: 310px;">
+            <canvas id="revenueTrendChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Merged "Why Did Profit Drop?" in Overview -->
+        <div class="profit-drop-card" id="merged-profit-drop-section">
+          <div class="profit-drop-header">
+            <div class="profit-drop-title-group">
+              <h3>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span>Why Did Profit Drop? (Margin & Variance Breakdown)</span>
+              </h3>
+              <div class="profit-drop-subtitle">
+                Gross sales grew +18.2% this month, but net profit grew only +4.1% due to acute refund surges and payment failure overhead.
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span class="badge badge-warning">₹2,10,000 Profit Gap</span>
+            </div>
+          </div>
+
+          <!-- Profit Variance Banner -->
+          <div class="profit-variance-banner">
+            <div>
+              <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted);">Expected Net Earnings</span>
+              <div style="font-size: 18px; font-weight: 800; color: #cbd5e1; font-family: 'JetBrains Mono', monospace;">₹16,90,000</div>
+            </div>
+            <div style="font-size: 20px; font-weight: 700; color: #f87171;">➔</div>
+            <div>
+              <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted);">Actual Net Earnings</span>
+              <div style="font-size: 18px; font-weight: 800; color: #34d399; font-family: 'JetBrains Mono', monospace;">₹14,80,000</div>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #f87171;">Net Compression</span>
+              <div style="font-size: 20px; font-weight: 800; color: #f87171; font-family: 'JetBrains Mono', monospace;">-₹2,10,000</div>
+            </div>
+          </div>
+
+          <!-- 4 Contributors Grid -->
+          <div class="profit-drivers-grid">
+            <div class="profit-driver-card">
+              <div class="profit-driver-top">
+                <span class="profit-driver-name">1. Refund Surge Spike</span>
+                <span class="profit-driver-amount">-₹80,000</span>
+              </div>
+              <p class="profit-driver-desc">
+                Acute return velocity on UltraSmart Watch Pro Series 4 (+42% returns on firmware v2.1.0 batch).
+              </p>
+            </div>
+
+            <div class="profit-driver-card">
+              <div class="profit-driver-top">
+                <span class="profit-driver-name">2. Gateway Retry Fees</span>
+                <span class="profit-driver-amount">-₹45,000</span>
+              </div>
+              <p class="profit-driver-desc">
+                HDFC gateway latency forced multiple duplicate card authorization attempts and non-refundable processing fees.
+              </p>
+            </div>
+
+            <div class="profit-driver-card">
+              <div class="profit-driver-top">
+                <span class="profit-driver-name">3. Reverse Freight Logistics</span>
+                <span class="profit-driver-amount">-₹52,000</span>
+              </div>
+              <p class="profit-driver-desc">
+                3PL courier pick-up costs and return shipping overhead on quarantined defective batches.
+              </p>
+            </div>
+
+            <div class="profit-driver-card">
+              <div class="profit-driver-top">
+                <span class="profit-driver-name">4. Checkout Cart Drops</span>
+                <span class="profit-driver-amount">-₹33,000</span>
+              </div>
+              <p class="profit-driver-desc">
+                Customer abandoned carts during the 2:14 PM card downtime reduced high-ticket electronics sales.
+              </p>
+            </div>
+          </div>
+
+          <!-- Plain-English AI Insight -->
+          <div style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.25); border-radius: var(--radius-md); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <div style="font-size: 13px; color: #cbd5e1; line-height: 1.45;" id="ai-summary-text">
+              ✨ <strong>AI Plain-English Takeaway:</strong> Your top-line sales grew strongly (+18%), but 38% of your margin gain was eroded by the watch return spike and HDFC card route timeouts. Resolving Incident #FI-1842 will immediately recover ₹1.80L.
+            </div>
+            <a href="/investigation.html?id=inc_fi_2026_1842" class="btn btn-secondary btn-sm" style="font-size: 12px; white-space: nowrap;">
+              See Root Cause →
+            </a>
+          </div>
+        </div>
+
+        <!-- Small Recent Incidents Section -->
+        <div class="recent-incidents-section">
+          <div class="recent-incidents-header">
+            <h3>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Recent Financial Incidents</span>
+            </h3>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="incident-filter-chips" id="incident-filter-chips">
+                <button class="filter-chip active" data-filter="all">All</button>
+                <button class="filter-chip" data-filter="critical">Critical</button>
+                <button class="filter-chip" data-filter="warning">Warning</button>
+                <button class="filter-chip" data-filter="resolved">Resolved</button>
+              </div>
+              <a href="/incidents.html" class="btn btn-secondary btn-sm" style="white-space: nowrap;">
+                View All Incidents →
+              </a>
+            </div>
+          </div>
+
+          <div id="active-incidents-container">
+            <!-- Populated dynamically by dashboard.js -->
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Simulated Fallback Modal -->
+  <div class="modal-overlay" id="failover-modal">
+    <div class="modal-box">
+      <div class="card-header">
+        <h3 class="card-title">
+          <span>⚡ Execute Simulated Fallback</span>
+        </h3>
+        <button class="btn btn-secondary btn-sm" id="btn-close-failover-modal" style="padding: 4px 8px;">✕</button>
+      </div>
+
+      <div class="failover-modal-body">
+        <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5;">
+          LedgerLens AI will dynamically route failing HDFC card checkouts to simulated UPI fallback and secondary test acquirer rails.
+        </p>
+
+        <div class="failover-impact-callout">
+          <div>
+            <div style="font-size: 11px; text-transform: uppercase; color: #6ee7b7; font-weight: 700;">Projected Savings</div>
+            <div style="font-size: 20px; font-weight: 800; color: #34d399;">₹1,80,000</div>
+          </div>
+          <span class="badge badge-success">Simulated Test Outcome</span>
+        </div>
+
+        <div class="failover-route-diagram">
+          <div class="route-node">
+            <div class="icon" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">HDFC</div>
+            <span style="color: #f87171;">Timeout (19.8%)</span>
+          </div>
+          <div class="route-arrow">➔ ➔</div>
+          <div class="route-node">
+            <div class="icon" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">UPI</div>
+            <span style="color: #34d399;">Simulated Fallback</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px;">
+          <button class="btn btn-secondary" id="btn-cancel-failover">Cancel</button>
+          <button class="btn btn-ai" id="btn-confirm-failover">🚀 Deploy Simulated Fallback</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/main.js"></script>
+  <script type="module" src="/js/dashboard.js"></script>
+</body>
+</html>

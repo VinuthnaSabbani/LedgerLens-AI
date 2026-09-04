@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What-If Simulator - Razorpay LedgerLens AI</title>
+  <meta name="description" content="Simulate financial outcomes: What if we detected the incident earlier? Counterfactual analysis for payment failures.">
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/incidents.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-text">Razorpay <span>LedgerLens</span></div>
+          <span class="badge-track">AI Financial Incident Guard</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="workflow-stepper-mini" title="Core Incident Workflow">
+          <span class="workflow-badge">RESPONSE WORKFLOW</span>
+          <div class="workflow-flow-text">
+            <span>Detect</span> ➔ <span>Investigate</span> ➔ <span>Quantify</span> ➔ <span>Simulate</span> ➔ <span>Recommend</span> ➔ <span>Approve</span> ➔ <span>Measure</span> ➔ <span>Learn</span>
+          </div>
+        </div>
+
+        <div class="nav-section-title">OVERVIEW</div>
+        <a href="/index.html" class="nav-item" data-nav="overview" title="Financial dashboard, active incident spotlight, and profit health">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span>Dashboard</span>
+        </a>
+
+        <div class="nav-section-title">INTELLIGENCE</div>
+        <a href="/incidents.html" class="nav-item" data-nav="incidents" title="Track, investigate, and mitigate financial payment incidents">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Financial Incidents</span>
+          <span class="nav-badge danger" id="sidebar-incident-badge">2</span>
+        </a>
+        <a href="/investigation.html" class="nav-item" data-nav="investigation" title="5-step root cause analysis, evidence, and recommended mitigation">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+          <span>Investigation</span>
+        </a>
+        <a href="/simulator.html" class="nav-item active" data-nav="simulator" title="Simulate financial outcomes of faster response strategies">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>What-If Simulator</span>
+        </a>
+
+        <div class="nav-section-title">CONTROL</div>
+        <a href="/actions.html" class="nav-item" data-nav="actions" title="Automated actions log, approval policies, and execution audit trail">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>Actions & Audit</span>
+        </a>
+
+        <div class="nav-section-title">INSIGHTS</div>
+        <a href="/postmortem.html" class="nav-item" data-nav="postmortem" title="Incident postmortems, financial recovery audit, and prevention rules">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span>Postmortems</span>
+        </a>
+
+        <div class="nav-section-title">SETTINGS</div>
+        <a href="/datasources.html" class="nav-item" data-nav="datasources" title="Connected store feeds, gateway webhooks, and payment sources">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <span>Data Connections</span>
+        </a>
+        <a href="/test-environment.html" class="nav-item" data-nav="testenv" title="Interactive payment failure triggers and synthetic webhook sandbox">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31L4.67 19.34A2 2 0 0 0 6.42 22h11.16a2 2 0 0 0 1.75-2.66L14 9.32V2"/><line x1="8.5" y1="2" x2="15.5" y2="2"/><line x1="7" y1="14.5" x2="17" y2="14.5"/></svg>
+          <span>Test Environment</span>
+        </a>
+        <a href="/settings.html" class="nav-item" data-nav="guardrails" title="Autonomous action ceilings, approval policies, and safety thresholds">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Action Guardrails</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="merchant-pill">
+          <div class="merchant-avatar">AP</div>
+          <div class="merchant-info">
+            <div class="merchant-name">Apex Brands Retail</div>
+            <div class="merchant-status"><span class="pulse-dot"></span> Connected Store (Test Data)</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="page-title-group">
+            <h1>What-If Simulator</h1>
+            <div class="page-subtitle">Counterfactual financial model: compare actual incident outcomes with simulated earlier response</div>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <span class="badge badge-purple" style="font-size: 11.5px; padding: 6px 12px;">🧪 SIMULATED SCENARIO — TEST DATASET</span>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <!-- Single Counterfactual Control Card -->
+        <div class="card" style="margin-bottom: 24px; padding: 22px 24px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+            <div>
+              <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-primary); font-weight: 800;">Counterfactual Question</span>
+              <h2 style="font-size: 18px; font-weight: 800; color: #fff; margin-top: 2px;">
+                "What if we detected the incident earlier?"
+              </h2>
+              <div style="font-size: 12.5px; color: var(--text-secondary); margin-top: 2px;">
+                Evaluate the financial impact if LedgerLens AI had alerted your team before the 16-minute manual discovery latency.
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <span class="badge badge-info" id="sim-confidence">91% Certainty (Test Model)</span>
+            </div>
+          </div>
+
+          <!-- The 4 Options: 5 min / 10 min / 15 min / 20 min -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;" id="earlier-options-container">
+            <button class="earlier-pill-btn" data-offset="-5" id="btn-opt-5">
+              <div class="pill-mins">5 min</div>
+              <div class="pill-label">Detected at 2:25 PM</div>
+              <div class="pill-sub">5m earlier</div>
+            </button>
+            <button class="earlier-pill-btn" data-offset="-10" id="btn-opt-10">
+              <div class="pill-mins">10 min</div>
+              <div class="pill-label">Detected at 2:20 PM</div>
+              <div class="pill-sub">10m earlier</div>
+            </button>
+            <button class="earlier-pill-btn active" data-offset="-15" id="btn-opt-15">
+              <div class="pill-mins">15 min</div>
+              <div class="pill-label">Detected at 2:15 PM</div>
+              <div class="pill-sub">15m earlier (Optimal)</div>
+            </button>
+            <button class="earlier-pill-btn" data-offset="-20" id="btn-opt-20">
+              <div class="pill-mins">20 min</div>
+              <div class="pill-label">Detected at 2:10 PM</div>
+              <div class="pill-sub">At onset</div>
+            </button>
+          </div>
+
+          <!-- Hidden inputs for simulator logic compatibility -->
+          <input type="hidden" id="slider-offset" value="-15" />
+          <input type="hidden" id="select-strategy" value="upi_fallback" />
+          <input type="hidden" id="select-retries" value="2" />
+          <input type="hidden" id="check-instant" value="true" />
+        </div>
+
+        <!-- AI Counterfactual Insight Banner -->
+        <div class="ai-callout-card" style="margin-bottom: 24px;">
+          <div class="ai-icon-bubble">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+          </div>
+          <div class="ai-callout-content">
+            <div class="ai-callout-title">
+              <span>Financial Counterfactual Analysis (Simulated)</span>
+              <span class="badge badge-success" id="sim-loss-reduction">57.1% Loss Reduced</span>
+            </div>
+            <div class="ai-callout-body" id="ai-counterfactual-insight">
+              Loading simulated financial counterfactual calculation...
+            </div>
+          </div>
+        </div>
+
+        <!-- Side-by-Side: Actual Outcome vs Simulated Outcome (4 KPIs Required) -->
+        <div class="card" style="margin-bottom: 24px; padding: 22px 24px;">
+          <div class="card-header" style="margin-bottom: 18px;">
+            <div>
+              <h3 class="card-title">Actual Outcome vs Simulated Outcome</h3>
+              <div class="card-subtitle">Direct comparison of real financial consequences versus earlier AI detection</div>
+            </div>
+            <span class="badge badge-purple">SIMULATED EVALUATION</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <!-- Column 1: Actual Outcome -->
+            <div style="background: rgba(239, 68, 68, 0.04); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-md); padding: 18px 20px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(239, 68, 68, 0.15); padding-bottom: 12px;">
+                <div>
+                  <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #f87171;">Observed Baseline</span>
+                  <h4 style="font-size: 16px; font-weight: 800; color: #fff;">Actual Outcome</h4>
+                </div>
+                <span class="badge badge-critical">16m Delay</span>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div class="kpi-metric-block">
+                  <div class="metric-label">Revenue Exposed</div>
+                  <div class="metric-value font-mono" id="actual-exposed-val" style="color: #cbd5e1;">₹4,20,000</div>
+                  <div class="metric-footnote">Gross checkout volume</div>
+                </div>
+                <div class="kpi-metric-block">
+                  <div class="metric-label">Revenue Lost</div>
+                  <div class="metric-value font-mono text-danger" id="actual-loss-val">₹4,20,000</div>
+                  <div class="metric-footnote">100% loss during outage</div>
+                </div>
+                <div class="kpi-metric-block">
+                  <div class="metric-label">Revenue Recovered</div>
+                  <div class="metric-value font-mono" id="actual-recovered-val" style="color: var(--text-muted);">₹0</div>
+                  <div class="metric-footnote">No fallback active</div>
+                </div>
+                <div class="kpi-metric-block">
+                  <div class="metric-label">Potential Money Preserved</div>
+                  <div class="metric-value font-mono" style="color: var(--text-muted);">₹0</div>
+                  <div class="metric-footnote">Unmitigated baseline</div>
+                </div>
+              </div>
+
+              <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(239, 68, 68, 0.15); font-size: 11.5px; color: var(--text-muted); display: flex; justify-content: space-between;">
+                <span>Detection: <strong style="color: #fff;" id="actual-detect-time">2:30 PM</strong></span>
+                <span>Response Mode: <strong>Manual Triage</strong></span>
+              </div>
+            </div>
+
+            <!-- Column 2: Simulated Outcome -->
+            <div style="background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md); padding: 18px 20px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(16, 185, 129, 0.15); padding-bottom: 12px;">
+                <div>
+                  <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #34d399;">Simulated Projection</span>
+                  <h4 style="font-size: 16px; font-weight: 800; color: #fff;">Simulated Outcome</h4>
+                </div>
+                <span class="badge badge-success" id="sim-time-badge">Detected 15m Earlier</span>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div class="kpi-metric-block">
+                  <div class="metric-label">Revenue Exposed</div>
+                  <div class="metric-value font-mono" id="sim-exposed-val" style="color: #cbd5e1;">₹4,20,000</div>
+                  <div class="metric-footnote">Same checkout volume</div>
+                </div>
+                <div class="kpi-metric-block">
+                  <div class="metric-label">Revenue Lost</div>
+                  <div class="metric-value font-mono text-warning" id="sim-loss-val">₹1,80,000</div>
+                  <div class="metric-footnote">Reduced from ₹4.20L</div>
+                </div>
+                <div class="kpi-metric-block">
+                  <div class="metric-label">Revenue Recovered</div>
+                  <div class="metric-value font-mono text-success" id="sim-recovered-val">₹2,40,000</div>
+                  <div class="metric-footnote">Via simulated fallback rail</div>
+                </div>
+                <div class="kpi-metric-block">
+                  <div class="metric-label">Potential Money Preserved</div>
+                  <div class="metric-value font-mono text-success" id="sim-preserved-val">+₹2,40,000</div>
+                  <div class="metric-footnote">Net: <span id="sim-net-benefit">₹2,32,000</span> after fees</div>
+                </div>
+              </div>
+
+              <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(16, 185, 129, 0.15); font-size: 11.5px; color: var(--text-muted); display: flex; justify-content: space-between;">
+                <span>Simulated Detection: <strong style="color: #34d399;" id="sim-detect-time">2:15 PM</strong></span>
+                <span>Intervention Cost: <strong style="color: #fbbf24;" id="sim-intervention-cost">₹8,000</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Loss Progression Chart -->
+        <div class="card" style="margin-bottom: 24px; padding: 22px 24px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Cumulative Revenue Loss: Actual vs Simulated Earlier Response</h3>
+              <div class="card-subtitle">Visual trajectory showing preserved money across the anomaly window</div>
+            </div>
+            <span class="badge badge-info">Simulated Test Model</span>
+          </div>
+          <div class="chart-container" style="height: 300px;">
+            <canvas id="simulatorChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Side-by-Side Timeline Comparison -->
+        <div class="card" style="margin-bottom: 24px; padding: 22px 24px;">
+          <div class="card-header">
+            <h3 class="card-title">Side-by-Side Incident Timeline Comparison</h3>
+            <span class="badge badge-secondary">Event Flow</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 12px;">
+            <div>
+              <h4 style="font-size: 12px; font-weight: 700; color: #f87171; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.04em;">
+                Actual Timeline (16-Minute Manual Detection Lag)
+              </h4>
+              <div id="actual-timeline-list"></div>
+            </div>
+            <div>
+              <h4 style="font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.04em;">
+                Simulated Timeline (Earlier AI Detection & Fallback)
+              </h4>
+              <div id="simulated-timeline-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Assumptions Box (Explicitly Required by User) -->
+        <div class="card" style="padding: 22px 24px; background: rgba(15, 23, 42, 0.6); border: 1px dashed rgba(148, 163, 184, 0.3);">
+          <div class="card-header" style="margin-bottom: 12px;">
+            <div>
+              <h4 style="font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+                <span>📋 Model Assumptions & Evaluation Parameters</span>
+              </h4>
+              <div style="font-size: 12px; color: var(--text-muted);">
+                All calculations in this What-If Simulator reflect the following explicit counterfactual assumptions:
+              </div>
+            </div>
+            <span class="badge badge-purple">SIMULATED</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; font-size: 12px; color: var(--text-secondary);">
+            <div style="background: var(--bg-surface); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <div style="color: #cbd5e1; font-weight: 600; margin-bottom: 2px;">Failure Onset Latency</div>
+              <div>Anomaly begins abruptly at 2:14 PM; actual detection occurs at 2:30 PM (16m lag).</div>
+            </div>
+            <div style="background: var(--bg-surface); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <div style="color: #cbd5e1; font-weight: 600; margin-bottom: 2px;">Checkout Run-Rate</div>
+              <div>₹26,250/min gross merchant transaction velocity exposed during outage.</div>
+            </div>
+            <div style="background: var(--bg-surface); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <div style="color: #cbd5e1; font-weight: 600; margin-bottom: 2px;">Simulated Fallback Rail</div>
+              <div>82% conversion rate on secondary UPI & acquirer rails for failing card users.</div>
+            </div>
+            <div style="background: var(--bg-surface); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <div style="color: #cbd5e1; font-weight: 600; margin-bottom: 2px;">Intervention Surcharge</div>
+              <div>Estimated ₹8,000 messaging and secondary gateway routing overhead.</div>
+            </div>
+          </div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 12px; font-style: italic;">
+            Note: Results are simulated estimates based on test dataset #FI-2026-1842 and historical checkout elasticities. Not an empirical guarantee of future network performance.
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <style>
+    .earlier-pill-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-primary);
+    }
+    .earlier-pill-btn:hover {
+      border-color: var(--accent-primary);
+      background: rgba(99, 102, 241, 0.08);
+    }
+    .earlier-pill-btn.active {
+      border-color: var(--accent-primary);
+      background: rgba(99, 102, 241, 0.16);
+      box-shadow: 0 0 0 1px var(--accent-primary);
+    }
+    .pill-mins {
+      font-size: 20px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+    }
+    .earlier-pill-btn.active .pill-mins {
+      color: #818cf8;
+    }
+    .pill-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-top: 4px;
+    }
+    .pill-sub {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .kpi-metric-block {
+      background: rgba(15, 23, 42, 0.4);
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+    }
+    .kpi-metric-block .metric-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .kpi-metric-block .metric-value {
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .kpi-metric-block .metric-footnote {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+  </style>
+
+  <script type="module" src="/js/main.js"></script>
+  <script type="module" src="/js/simulator.js"></script>
+</body>
+</html>

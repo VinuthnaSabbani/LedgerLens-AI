@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Environment & Triggers - Razorpay LedgerLens AI</title>
+  <meta name="description" content="Simulate payment failures, refund surges, and bank payout delays to test the AI incident response cycle in real-time.">
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/incidents.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-text">Razorpay <span>LedgerLens</span></div>
+          <span class="badge-track">AI Financial Incident Guard</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="workflow-stepper-mini" title="Core Incident Workflow">
+          <span class="workflow-badge">RESPONSE WORKFLOW</span>
+          <div class="workflow-flow-text">
+            <span>Detect</span> ➔ <span>Investigate</span> ➔ <span>Quantify</span> ➔ <span>Simulate</span> ➔ <span>Recommend</span> ➔ <span>Approve</span> ➔ <span>Measure</span> ➔ <span>Learn</span>
+          </div>
+        </div>
+
+        <div class="nav-section-title">OVERVIEW</div>
+        <a href="/index.html" class="nav-item" data-nav="overview" title="Financial dashboard, active incident spotlight, and profit health">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span>Dashboard</span>
+        </a>
+
+        <div class="nav-section-title">INTELLIGENCE</div>
+        <a href="/incidents.html" class="nav-item" data-nav="incidents" title="Track, investigate, and mitigate financial payment incidents">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Financial Incidents</span>
+          <span class="nav-badge danger" id="sidebar-incident-badge">2</span>
+        </a>
+        <a href="/investigation.html" class="nav-item" data-nav="investigation" title="5-step root cause analysis, evidence, and recommended mitigation">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+          <span>Investigation</span>
+        </a>
+        <a href="/simulator.html" class="nav-item" data-nav="simulator" title="Simulate financial outcomes of faster response strategies">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>What-If Simulator</span>
+        </a>
+
+        <div class="nav-section-title">CONTROL</div>
+        <a href="/actions.html" class="nav-item" data-nav="actions" title="Automated actions log, approval policies, and execution audit trail">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>Actions & Audit</span>
+        </a>
+
+        <div class="nav-section-title">INSIGHTS</div>
+        <a href="/postmortem.html" class="nav-item" data-nav="postmortem" title="Incident postmortems, financial recovery audit, and prevention rules">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span>Postmortems</span>
+        </a>
+
+        <div class="nav-section-title">SETTINGS</div>
+        <a href="/datasources.html" class="nav-item" data-nav="datasources" title="Connected store feeds, gateway webhooks, and payment sources">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <span>Data Connections</span>
+        </a>
+        <a href="/test-environment.html" class="nav-item active" data-nav="testenv" title="Interactive payment failure triggers and synthetic webhook sandbox">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31L4.67 19.34A2 2 0 0 0 6.42 22h11.16a2 2 0 0 0 1.75-2.66L14 9.32V2"/><line x1="8.5" y1="2" x2="15.5" y2="2"/><line x1="7" y1="14.5" x2="17" y2="14.5"/></svg>
+          <span>Test Environment</span>
+        </a>
+        <a href="/settings.html" class="nav-item" data-nav="guardrails" title="Autonomous action ceilings, approval policies, and safety thresholds">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Action Guardrails</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="merchant-pill">
+          <div class="merchant-avatar">AP</div>
+          <div class="merchant-info">
+            <div class="merchant-name">Apex Brands Retail</div>
+            <div class="merchant-status"><span class="pulse-dot"></span> Connected Store (Test Data)</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="page-title-group">
+            <h1>Test Environment & Triggers</h1>
+            <div class="page-subtitle">Simulate real-time payment anomalies to demonstrate LedgerLens AI detection & mitigation</div>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <span class="badge badge-purple" style="padding: 6px 12px; font-size: 12px;">🧪 Interactive Sandbox Mode</span>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <!-- Interactive Anomaly Injector Card -->
+        <div class="card" style="margin-bottom: 24px; padding: 22px 24px;">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Interactive Anomaly Triggers (Demo Suite)</h2>
+              <div class="card-subtitle">Click any trigger below to simulate incoming webhook failure bursts and watch LedgerLens respond</div>
+            </div>
+            <span class="badge badge-info">Zero Production Risk</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 18px;">
+            <div style="background: var(--bg-surface); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-md); padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 14px; font-weight: 700; color: #f87171;">Card Payment Failure Surge</span>
+                  <span class="badge badge-critical">Critical</span>
+                </div>
+                <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-bottom: 14px;">
+                  Simulates 18 consecutive bank server timeouts on HDFC card gateway rail during flash sale.
+                </p>
+              </div>
+              <button class="btn btn-secondary" style="border-color: rgba(239, 68, 68, 0.4); color: #fca5a5; width: 100%; justify-content: center;" id="btn-trigger-card-fail">
+                ⚡ Fire Card Failure Spike
+              </button>
+            </div>
+
+            <div style="background: var(--bg-surface); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--radius-md); padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 14px; font-weight: 700; color: #fbbf24;">Sudden Refund Spike</span>
+                  <span class="badge badge-warning">High</span>
+                </div>
+                <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-bottom: 14px;">
+                  Simulates 12 rapid customer returns citing hardware overheating on SmartWatch Pro batch #BL-8802.
+                </p>
+              </div>
+              <button class="btn btn-secondary" style="border-color: rgba(245, 158, 11, 0.4); color: #fcd34d; width: 100%; justify-content: center;" id="btn-trigger-refund-spike">
+                ⚡ Fire Refund Surge
+              </button>
+            </div>
+
+            <div style="background: var(--bg-surface); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: var(--radius-md); padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 14px; font-weight: 700; color: #38bdf8;">Bank Settlement Hold</span>
+                  <span class="badge badge-info">Moderate</span>
+                </div>
+                <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-bottom: 14px;">
+                  Simulates daily automated merchant settlement delayed by acquiring bank reconciliation checks.
+                </p>
+              </div>
+              <button class="btn btn-secondary" style="border-color: rgba(56, 189, 248, 0.4); color: #7dd3fc; width: 100%; justify-content: center;" id="btn-trigger-payout-delay">
+                ⚡ Fire Settlement Hold
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-time Table: Payment Event Stream — Synthetic/Test Data -->
+        <div class="card" style="padding: 22px 24px;">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Payment Event Stream — Synthetic/Test Data</h2>
+              <div class="card-subtitle">Live simulated webhook events ingested from synthetic payment simulator</div>
+            </div>
+            <span class="badge badge-success">● Ingestion Active</span>
+          </div>
+
+          <div class="rzp-table-wrapper" style="margin-top: 14px; overflow-x: auto;">
+            <table class="rzp-table" style="width: 100%; border-collapse: collapse; font-size: 13px;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-muted); font-size: 11.5px; text-transform: uppercase;">
+                  <th style="padding: 10px 12px;">Event ID</th>
+                  <th style="padding: 10px 12px;">Activity Type</th>
+                  <th style="padding: 10px 12px;">Order Ref</th>
+                  <th style="padding: 10px 12px; text-align: right;">Amount</th>
+                  <th style="padding: 10px 12px;">Gateway Result / Error</th>
+                  <th style="padding: 10px 12px; text-align: right;">Timestamp</th>
+                </tr>
+              </thead>
+              <tbody id="test-events-tbody">
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 12px;"><code class="font-mono" style="color: #60a5fa;">evt_test_90412</code></td>
+                  <td style="padding: 12px;"><span class="badge badge-critical">Payment Failed</span></td>
+                  <td style="padding: 12px;"><code>ord_P091842</code></td>
+                  <td style="padding: 12px; text-align: right; font-weight: 700; color: #fff;">₹3,499</td>
+                  <td style="padding: 12px; color: #f87171;">HDFC Card Server Timeout (504 GATEWAY_TIMEOUT)</td>
+                  <td style="padding: 12px; text-align: right; color: var(--text-dim);">Just now</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 12px;"><code class="font-mono" style="color: #60a5fa;">evt_test_90411</code></td>
+                  <td style="padding: 12px;"><span class="badge badge-success">Payment Received</span></td>
+                  <td style="padding: 12px;"><code>ord_P091841</code></td>
+                  <td style="padding: 12px; text-align: right; font-weight: 700; color: #fff;">₹1,850</td>
+                  <td style="padding: 12px; color: #34d399;">UPI Success (Google Pay - 1-Click Fallback)</td>
+                  <td style="padding: 12px; text-align: right; color: var(--text-dim);">1 min ago</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 12px;"><code class="font-mono" style="color: #60a5fa;">evt_test_90410</code></td>
+                  <td style="padding: 12px;"><span class="badge badge-warning">Refund Requested</span></td>
+                  <td style="padding: 12px;"><code>ord_R842109</code></td>
+                  <td style="padding: 12px; text-align: right; font-weight: 700; color: #fff;">₹4,999</td>
+                  <td style="padding: 12px; color: #fbbf24;">Defective Watch (Firmware v2.1.0 Overheat)</td>
+                  <td style="padding: 12px; text-align: right; color: var(--text-dim);">3 mins ago</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 12px;"><code class="font-mono" style="color: #60a5fa;">evt_test_90409</code></td>
+                  <td style="padding: 12px;"><span class="badge badge-success">Payment Received</span></td>
+                  <td style="padding: 12px;"><code>ord_P091838</code></td>
+                  <td style="padding: 12px; text-align: right; font-weight: 700; color: #fff;">₹9,200</td>
+                  <td style="padding: 12px; color: #34d399;">ICICI Netbanking Captured</td>
+                  <td style="padding: 12px; text-align: right; color: var(--text-dim);">5 mins ago</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="/js/main.js"></script>
+  <script type="module">
+    import { showToast, formatINR } from '/js/api.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const tbody = document.getElementById('test-events-tbody');
+
+      function injectEvent(badgeHtml, orderRef, amount, resultText, resultColor) {
+        const id = 'evt_test_' + Math.floor(10000 + Math.random() * 90000);
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+        tr.style.backgroundColor = 'rgba(12, 131, 254, 0.15)';
+        tr.style.transition = 'background-color 1s ease';
+        tr.innerHTML = `
+          <td style="padding: 12px;"><code class="font-mono" style="color: #60a5fa;">${id}</code></td>
+          <td style="padding: 12px;">${badgeHtml}</td>
+          <td style="padding: 12px;"><code>${orderRef}</code></td>
+          <td style="padding: 12px; text-align: right; font-weight: 700; color: #fff;">${amount}</td>
+          <td style="padding: 12px; color: ${resultColor}; font-weight: 500;">${resultText}</td>
+          <td style="padding: 12px; text-align: right; color: #38bdf8;">Just now</td>
+        `;
+        if (tbody) {
+          tbody.insertBefore(tr, tbody.firstChild);
+          setTimeout(() => {
+            tr.style.backgroundColor = 'transparent';
+          }, 1500);
+        }
+      }
+
+      document.getElementById('btn-trigger-card-fail')?.addEventListener('click', () => {
+        injectEvent('<span class="badge badge-critical">Payment Failed</span>', 'ord_P09' + Math.floor(1000 + Math.random()*9000), '₹4,299', 'HDFC Card Rail Timeout (504 TIMEOUT)', '#f87171');
+        showToast('🔴 Injected Synthetic Failure Burst: Failure rate surged on card gateway route.', 'danger');
+      });
+
+      document.getElementById('btn-trigger-refund-spike')?.addEventListener('click', () => {
+        injectEvent('<span class="badge badge-warning">Refund Requested</span>', 'ord_R' + Math.floor(1000 + Math.random()*9000), '₹4,999', 'SmartWatch Pro Return Request (Batch BL-8802)', '#fbbf24');
+        showToast('🟠 Injected Synthetic Refund Spike: Anomaly flagged in product quality detector.', 'warning');
+      });
+
+      document.getElementById('btn-trigger-payout-delay')?.addEventListener('click', () => {
+        injectEvent('<span class="badge badge-info">Settlement Hold</span>', 'stl_B' + Math.floor(1000 + Math.random()*9000), '₹1,45,000', 'Automated Daily Settlement Delayed by Acquirer Reconciliation', '#7dd3fc');
+        showToast('🟡 Injected Bank Settlement Delay: Anomaly flagged for cash flow monitoring.', 'info');
+      });
+    });
+  </script>
+</body>
+</html>

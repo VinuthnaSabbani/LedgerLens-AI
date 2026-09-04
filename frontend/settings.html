@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action Guardrails - Razorpay LedgerLens AI</title>
+  <meta name="description" content="Set autonomous action ceilings, merchant approval policies, and safety thresholds for payment fixes.">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/incidents.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-text">Razorpay <span>LedgerLens</span></div>
+          <span class="badge-track">AI Financial Incident Guard</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="workflow-stepper-mini" title="Core Incident Workflow">
+          <span class="workflow-badge">RESPONSE WORKFLOW</span>
+          <div class="workflow-flow-text">
+            <span>Detect</span> ➔ <span>Investigate</span> ➔ <span>Quantify</span> ➔ <span>Simulate</span> ➔ <span>Recommend</span> ➔ <span>Approve</span> ➔ <span>Measure</span> ➔ <span>Learn</span>
+          </div>
+        </div>
+
+        <div class="nav-section-title">OVERVIEW</div>
+        <a href="/index.html" class="nav-item" data-nav="overview" title="Financial dashboard, active incident spotlight, and profit health">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span>Dashboard</span>
+        </a>
+
+        <div class="nav-section-title">INTELLIGENCE</div>
+        <a href="/incidents.html" class="nav-item" data-nav="incidents" title="Track, investigate, and mitigate financial payment incidents">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Financial Incidents</span>
+          <span class="nav-badge danger" id="sidebar-incident-badge">2</span>
+        </a>
+        <a href="/investigation.html" class="nav-item" data-nav="investigation" title="5-step root cause analysis, evidence, and recommended mitigation">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+          <span>Investigation</span>
+        </a>
+        <a href="/simulator.html" class="nav-item" data-nav="simulator" title="Simulate financial outcomes of faster response strategies">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>What-If Simulator</span>
+        </a>
+
+        <div class="nav-section-title">CONTROL</div>
+        <a href="/actions.html" class="nav-item" data-nav="actions" title="Automated actions log, approval policies, and execution audit trail">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>Actions & Audit</span>
+        </a>
+
+        <div class="nav-section-title">INSIGHTS</div>
+        <a href="/postmortem.html" class="nav-item" data-nav="postmortem" title="Incident postmortems, financial recovery audit, and prevention rules">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span>Postmortems</span>
+        </a>
+
+        <div class="nav-section-title">SETTINGS</div>
+        <a href="/datasources.html" class="nav-item" data-nav="datasources" title="Connected store feeds, gateway webhooks, and payment sources">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <span>Data Connections</span>
+        </a>
+        <a href="/test-environment.html" class="nav-item" data-nav="testenv" title="Interactive payment failure triggers and synthetic webhook sandbox">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31L4.67 19.34A2 2 0 0 0 6.42 22h11.16a2 2 0 0 0 1.75-2.66L14 9.32V2"/><line x1="8.5" y1="2" x2="15.5" y2="2"/><line x1="7" y1="14.5" x2="17" y2="14.5"/></svg>
+          <span>Test Environment</span>
+        </a>
+        <a href="/settings.html" class="nav-item active" data-nav="guardrails" title="Autonomous action ceilings, approval policies, and safety thresholds">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Action Guardrails</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="merchant-pill">
+          <div class="merchant-avatar">AP</div>
+          <div class="merchant-info">
+            <div class="merchant-name">Apex Brands Retail</div>
+            <div class="merchant-status"><span class="pulse-dot"></span> Guardrails Armed</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="page-title-group">
+            <h1>Action Guardrails</h1>
+            <div class="page-subtitle">Autonomous action ceilings, approval policies, and safety thresholds</div>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-primary btn-sm" id="btn-save-settings">Save Action Guardrails</button>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <!-- Action Guardrails 3 Key Pillars -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 24px;">
+          <!-- Pillar 1: AI Action Limit -->
+          <div class="card" style="padding: 22px 20px;">
+            <div class="card-header" style="margin-bottom: 14px;">
+              <div>
+                <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #818cf8;">Pillar 1</span>
+                <h3 class="card-title" style="font-size: 16px;">AI Action Limit</h3>
+              </div>
+              <span class="badge badge-purple">Bounded SLA</span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
+              Sets strict mathematical caps on autonomous actions without waiting for human intervention.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label>Autonomous Cost Ceiling (Per Incident)</label>
+              <input type="text" class="form-control font-mono" value="₹25,000" />
+              <div style="font-size: 10.5px; color: var(--text-muted); margin-top: 4px;">
+                Actions with estimated intervention cost under ₹25,000 proceed automatically.
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label>Traffic Routing Throttle</label>
+              <input type="text" class="form-control font-mono" value="Max 30% Checkout Volume" />
+              <div style="font-size: 10.5px; color: var(--text-muted); margin-top: 4px;">
+                Prevents sudden total switchovers on unverified network changes.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Max Automated Retry Duration</label>
+              <input type="text" class="form-control font-mono" value="45 Minutes" />
+              <div style="font-size: 10.5px; color: var(--text-muted); margin-top: 4px;">
+                Auto-reverts if primary bank recovery is confirmed or window expires.
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 2: Approval Required -->
+          <div class="card" style="padding: 22px 20px;">
+            <div class="card-header" style="margin-bottom: 14px;">
+              <div>
+                <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #fbbf24;">Pillar 2</span>
+                <h3 class="card-title" style="font-size: 16px;">Approval Required</h3>
+              </div>
+              <span class="badge badge-warning">Human Sign-off</span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
+              Strict human-in-the-loop triggers before executing high-impact interventions.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; background: var(--bg-surface); padding: 10px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <input type="checkbox" checked style="accent-color: var(--accent-primary); margin-top: 3px;" />
+                <div>
+                  <div style="font-size: 12.5px; font-weight: 600; color: #fff;">Financial Impact &gt; ₹50,000</div>
+                  <div style="font-size: 11px; color: var(--text-muted);">Halts auto-execution and mandates manual confirmation.</div>
+                </div>
+              </label>
+
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; background: var(--bg-surface); padding: 10px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <input type="checkbox" checked style="accent-color: var(--accent-primary); margin-top: 3px;" />
+                <div>
+                  <div style="font-size: 12.5px; font-weight: 600; color: #fff;">Full Acquirer Route Failover</div>
+                  <div style="font-size: 11px; color: var(--text-muted);">Switching primary gateway requires one-click owner sign-off.</div>
+                </div>
+              </label>
+
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; background: var(--bg-surface); padding: 10px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <input type="checkbox" checked style="accent-color: var(--accent-primary); margin-top: 3px;" />
+                <div>
+                  <div style="font-size: 12.5px; font-weight: 600; color: #fff;">Emergency Alerts (SMS & WhatsApp)</div>
+                  <div style="font-size: 11px; color: var(--text-muted);">Sends immediate dispatch with 2-minute decision deadline.</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pillar 3: Audit Trail -->
+          <div class="card" style="padding: 22px 20px;">
+            <div class="card-header" style="margin-bottom: 14px;">
+              <div>
+                <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #34d399;">Pillar 3</span>
+                <h3 class="card-title" style="font-size: 16px;">Audit Trail</h3>
+              </div>
+              <span class="badge badge-success">Verifiable</span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
+              Cryptographic, tamper-evident recording of all automated and approved actions.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; background: var(--bg-surface); padding: 10px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <input type="checkbox" checked style="accent-color: var(--accent-primary); margin-top: 3px;" />
+                <div>
+                  <div style="font-size: 12.5px; font-weight: 600; color: #fff;">Immutable Execution Log</div>
+                  <div style="font-size: 11px; color: var(--text-muted);">Every rule change, recommendation, and approval is timestamped.</div>
+                </div>
+              </label>
+
+              <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; background: var(--bg-surface); padding: 10px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <input type="checkbox" checked style="accent-color: var(--accent-primary); margin-top: 3px;" />
+                <div>
+                  <div style="font-size: 12.5px; font-weight: 600; color: #fff;">Post-Mitigation Verification</div>
+                  <div style="font-size: 11px; color: var(--text-muted);">Measures recovered rupees vs unmitigated baseline loss.</div>
+                </div>
+              </label>
+
+              <div style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: var(--radius-sm); padding: 10px 12px;">
+                <div style="font-size: 11.5px; color: #34d399; font-weight: 700; margin-bottom: 2px;">Audit Compliance Status</div>
+                <div style="font-size: 11px; color: var(--text-muted);">100% compliance with SOC2 & RBI Payment Aggregator Guidelines.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="/js/main.js"></script>
+  <script>
+    document.getElementById('btn-save-settings')?.addEventListener('click', () => {
+      window.LedgerLensApp?.showToast('✓ Action guardrails and approval policies saved!', 'success');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "LedgerLens AI",
+  "description": "AI-Powered Financial Incident Intelligence & Anomaly Response Platform for Merchants (Razorpay Track 04)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
